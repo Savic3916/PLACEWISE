@@ -1,50 +1,103 @@
-# Welcome to your Expo app 👋
+🏠 PLACEWISE
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A cross-platform React Native application designed to make it easy for **home buyers** to discover available properties and for **home sellers** to connect with potential buyers. Simple login, smart listing, and smooth browsing — all in one place.
 
-## Get started
+---
 
-1. Install dependencies
+## 🚀 Features
 
+- 🔐 **User Authentication** (Buyers and Sellers)
+- 🏘️ **Browse Available Properties** by location, price, and features
+- 📸 **Post and Manage Listings** (for Sellers)
+- 🔍 **Advanced Search and Filtering** for Buyers
+- 💬 **In-App Messaging** between Buyers and Sellers *(coming soon)*
+- 📍 **Map Integration** for nearby homes *(coming soon)*
+
+---
+
+## 📦 Tech Stack
+
+- **React Native** (Expo)
+- **Firebase** / Supabase (Authentication & Backend)
+- **Expo Router**
+- **Styled Components** / Tailwind CSS (via NativeWind)
+- **Redux Toolkit** (for state management)
+
+---
+
+## 🔧 Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/Savic3916/PLACEWISE.git
+   cd house-finder-app
+   ```
+
+2. **Install dependencies**
    ```bash
    npm install
+   # or
+   yarn
    ```
 
-2. Start the app
-
+3. **Run the app**
    ```bash
-    npx expo start
+   npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+---
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## 📁 Project Structure
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```
+.
+├── app/
+│   ├── components/
+│   ├── screens/
+│   ├── navigation/
+│   ├── services/
+│   └── store/
+├── assets/
+├── App.js
+└── README.md
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+---
 
-## Learn more
+## 📸 Screenshots *(coming soon)*
 
-To learn more about developing your project with Expo, look at the following resources:
+Add screenshots of:
+- Home screen
+- Login/Signup
+- Listing page
+- Post property page
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+---
 
-## Join the community
+## 🤝 Contributing
 
-Join our community of developers creating universal apps.
+Contributions are welcome! Please fork the repository and submit a pull request.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+---
+
+## 📄 License
+
+MIT License. See `LICENSE` file for more information.
+
+---
+
+## 🧠 Future Features
+
+- In-app chat between buyers and sellers
+- Push notifications
+- Favorites and saved searches
+- Mortgage calculator
+- AI-based home recommendations
+
+---
+
+## 📬 Contact
+
+Created by AKPAN VICTOR - feel free to reach out @savic3916@gmail.com
+
+---

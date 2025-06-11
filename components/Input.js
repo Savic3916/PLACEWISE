@@ -1,0 +1,63 @@
+import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import Color from "../constants/Color";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import Ionicons from "@expo/vector-icons/Ionicons";
+
+export default function Input({
+  hasPassword,
+  inputTextStyle,
+  inputStyle,
+  text,
+  props,
+  iconName,
+  onPress,
+}) {
+  if (hasPassword) {
+    return (
+      <View style={{ position: "relative" }}>
+        <View style={styles.container}>
+          <Text style={inputTextStyle}>{text}</Text>
+        </View>
+        <View style={styles.placeholderIcon}>
+          <FontAwesome name={iconName} size={18} color={Color.gray200} />
+        </View>
+        <TextInput style={inputStyle} {...props} />
+        <Pressable onPress={onPress} style={styles.passwordShowToggle}>
+          <Ionicons name="eye" size={18} color={Color.gray200} />
+        </Pressable>
+      </View>
+    );
+  } else {
+    return (
+      <View style={{ position: "relative" }}>
+        <View style={styles.container}>
+          <Text style={inputTextStyle}>{text}</Text>
+        </View>
+        <View style={styles.placeholderIcon}>
+          <FontAwesome name={iconName} size={18} color={Color.gray200} />
+        </View>
+        <TextInput style={inputStyle} {...props} />
+      </View>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: "center",
+    backgroundColor: Color.white,
+    position: "absolute",
+    padding: 5,
+    left: 20,
+  },
+  placeholderIcon: {
+    position: "absolute",
+    left: 20,
+    top: 35,
+  },
+  passwordShowToggle: {
+    position: "absolute",
+    top: 30,
+    right: 15,
+  },
+});
