@@ -30,7 +30,7 @@ A cross-platform React Native application designed to make it easy for **home bu
 1. **Clone the repository**
    ```bash
    git clone https://github.com/Savic3916/PLACEWISE.git
-   cd house-finder-app
+   cd PLACEWISE
    ```
 
 2. **Install dependencies**

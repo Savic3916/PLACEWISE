@@ -1,0 +1,39 @@
+Primary / Base Color
+#E92068 → Brand color, buttons, icons, highlights
+
+🌫️ Neutral Background / Surface
+#FFFFFF → Clean white
+
+#F7F7F7 → Light gray for cards, backgrounds
+
+#E9ECEF → Soft neutral for subtle surfaces
+
+🖤 Text / Contrast / Depth
+#212529 → Rich black-gray for headings and body text
+
+#4F4F4F → Medium dark for muted text or UI outlines
+
+💧 Accent / Contrast Color
+#1BC7D1 → Teal/aqua blue for secondary buttons, links, highlights
+
+#20A4F3 → Light blue for hover states, visual contrast
+
+💜 Soft Supporting Color
+#FAD4E4 → Soft blush/pink for background tints, inactive elements
+
+#F2E6F8 → Light lavender for secondary UI elements or backgrounds
+
+🌈 Optional Secondary Brand Colors
+#FFAA00 → Vibrant amber (for alerts or warm contrast)
+
+#7C3AED → Bold violet (good for depth or tertiary emphasis)
+
+Suggested Usage:
+Purpose	Color
+Primary Buttons	#E92068
+Background	#F7F7F7
+Text (Dark)	#212529
+Accent Highlights	#1BC7D1
+Soft Background	#FAD4E4
+Secondary Button	#20A4F3
+Disabled States	#E9ECEF

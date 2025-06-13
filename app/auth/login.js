@@ -1,39 +1,28 @@
 import { StyleSheet, Text, View, Dimensions, TextInput } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import Color from "../../constants/Color";
 import Input from "../../components/Input";
+import Button from "../../components/Button";
 
 const deviceWidth = Dimensions.get("window").width;
 const deviceHeight = Dimensions.get("window").height;
 
-export default function login({ }) {
+export default function Login({}) {
+  const [secure, setSecure] = useState(true);
 
-  function showHidePasswordHandler(){
-    console.log('Pressed!!')
-  };
+  function showHidePasswordHandler() {
+    setSecure(!secure);
+  }
+  function buttonHandler() {
+    console.log("Pressed");
+  }
 
   return (
     <View style={styles.screen}>
       <View style={styles.container}>
-        <Text
-          style={{
-            fontFamily: "SpaceMono-Regular",
-            fontSize: 18,
-            letterSpacing: 2,
-          }}
-        >
-          Welcome Back to
-        </Text>
-        <Text
-          style={{
-            fontFamily: "CrimsonText-Bold",
-            fontSize: 28,
-            marginBottom: "3%",
-          }}
-        >
-          PLACEWISE
-        </Text>
-        <Text style={{ color: Color.gray200, fontWeight: "600" }}>
+        <Text style={styles.firstScreenText}>Welcome Back to</Text>
+        <Text style={styles.placeWiseText}>PLACEWISE</Text>
+        <Text style={{ color: Color.textInputIconGrays, fontWeight: "600" }}>
           Hey there, Sign in to continue
         </Text>
       </View>
@@ -52,9 +41,49 @@ export default function login({ }) {
           inputTextStyle={styles.inputText}
           iconName="lock"
           onPress={showHidePasswordHandler}
-          props={{ secureTextEntry: true }}
+          props={{ secureTextEntry: secure }}
+          secure={secure}
         />
       </View>
+      <Button
+        hasIcon={false}
+        text="Login"
+        onPress={buttonHandler}
+        buttonContainerWithoutIcons={styles.buttonContainerWithoutIcons}
+        textStyle={styles.buttonText}
+      />
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          marginVertical: "3%",
+        }}
+      >
+        <View style={styles.line} />
+        <Text> or </Text>
+        <View style={styles.line} />
+      </View>
+      <Button
+        hasIcon={true}
+        buttonContainerWithIcon={styles.buttonContainerWithIcons}
+        imageSource={require("../../assets/images/communication.png")}
+        text="Sign in with Google"
+        textStyle={{
+          fontWeight: "500",
+          fontSize: deviceWidth < 321 ? 14 : 15,
+        }}
+      />
+      <Button
+        hasIcon={true}
+        buttonContainerWithIcon={styles.buttonContainerWithIcons}
+        imageSource={require("../../assets/images/google.png")}
+        text="Sign in with Facebook"
+        textStyle={{
+          fontWeight: "500",
+          fontSize: deviceWidth < 321 ? 14 : 15,
+        }}
+      />
+      <Text>Don't have an account? </Text>
     </View>
   );
 }
@@ -66,8 +95,19 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   container: {
-    marginTop: "20%",
+    marginTop: "15%",
     alignItems: "center",
+  },
+  firstScreenText: {
+    fontFamily: "SpaceMono-Regular",
+    fontSize: 15,
+    letterSpacing: 2,
+  },
+  placeWiseText: {
+    fontFamily: "Poppins-Black",
+    fontSize: 35,
+    marginBottom: "3%",
+    letterSpacing: 3,
   },
   image: {
     flex: 1,
@@ -75,13 +115,52 @@ const styles = StyleSheet.create({
   },
   input: {
     marginVertical: "4%",
-    borderColor: Color.red100,
-    padding: 17,
+    borderColor: Color.buttonRed,
+    padding: 15,
     paddingLeft: "15%",
     borderWidth: 2,
     borderRadius: 20,
   },
   inputText: {
-    color: Color.red100,
+    color: Color.buttonRed,
+  },
+  buttonContainerWithoutIcons: {
+    paddingVertical: deviceWidth < 321 ? 8 : 10,
+    paddingHorizontal: deviceWidth < 321 ? "8%" : "10%",
+    backgroundColor: Color.buttonRed,
+    borderColor: Color.buttonRed,
+    borderWidth: 2,
+    borderRadius: 12,
+    marginVertical: "4%",
+    shadowColor: "black",
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+    alignItems: "center",
+  },
+  buttonText: {
+    fontWeight: "bold",
+    fontSize: deviceWidth < 321 ? 12 : 15,
+    color: Color.white,
+    letterSpacing: 5,
+    fontFamily: "SpaceMono-Regular",
+  },
+  line: {
+    flex: 1,
+    borderBottomColor: Color.textInputIconGrays,
+    borderBottomWidth: 1,
+  },
+  buttonContainerWithIcons: {
+    paddingVertical: deviceWidth < 321 ? 8 : 10,
+    paddingHorizontal: deviceWidth < 321 ? "8%" : "10%",
+    backgroundColor: Color.supportingSecondaryButtonTeal,
+    borderColor: Color.supportingSecondaryButtonTeal,
+    borderWidth: 2,
+    borderRadius: 12,
+    marginVertical: 6,
+    shadowColor: "black",
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
   },
 });

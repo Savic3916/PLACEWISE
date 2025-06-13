@@ -35,7 +35,7 @@ export default function FirstScreen({}) {
       <View>
         <Button
           hasIcon={true}
-          buttonContainerWIthIcon={styles.buttonContainerWIthIcons}
+          buttonContainerWithIcon={styles.buttonContainerWithIcons}
           imageSource={require("../assets/images/real-estate.png")}
           text="Purchase a home"
           textStyle={{
@@ -46,7 +46,7 @@ export default function FirstScreen({}) {
         />
         <Button
           hasIcon={true}
-          buttonContainerWIthIcon={styles.buttonContainerWIthIcons}
+          buttonContainerWithIcon={styles.buttonContainerWithIcons}
           imageSource={require("../assets/images/rent.png")}
           text="Rent a home"
           textStyle={{
@@ -57,7 +57,7 @@ export default function FirstScreen({}) {
         />
         <Button
           hasIcon={true}
-          buttonContainerWIthIcon={styles.buttonContainerWIthIcons}
+          buttonContainerWithIcon={styles.buttonContainerWithIcons}
           imageSource={require("../assets/images/sale.png")}
           text="Sale a home"
           textStyle={{
@@ -70,12 +70,12 @@ export default function FirstScreen({}) {
       <View style={{ marginTop: deviceHeight < 569 ? "10%" : "15%" }}>
         <Button
           hasIcon={false}
-          buttonContainerWIthoutIcons={styles.buttonContainerWIthoutIcons}
+          buttonContainerWithoutIcons={styles.buttonContainerWithoutIcons}
           text="SKIP"
           textStyle={{
             fontWeight: "500",
             fontSize: deviceWidth < 321 ? 15 : 18,
-            color: "white",
+            color: Color.white,
             letterSpacing: 5,
           }}
           onPress={skipButtonHander}
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     backgroundColor: "red",
     justifyContent: "center",
   },
-  buttonContainerWIthIcons: {
+  buttonContainerWithIcons: {
     paddingVertical: deviceWidth < 321 ? 8 : 10,
     paddingHorizontal: deviceWidth < 321 ? "8%" : "10%",
     backgroundColor: Color.white,
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 3,
   },
-  buttonContainerWIthoutIcons: {
+  buttonContainerWithoutIcons: {
     paddingVertical: deviceWidth < 321 ? 8 : 10,
     paddingHorizontal: deviceWidth < 321 ? "8%" : "10%",
     backgroundColor: Color.buttonRed,

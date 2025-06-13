@@ -11,6 +11,7 @@ export default function Input({
   props,
   iconName,
   onPress,
+  secure,
 }) {
   if (hasPassword) {
     return (
@@ -19,11 +20,30 @@ export default function Input({
           <Text style={inputTextStyle}>{text}</Text>
         </View>
         <View style={styles.placeholderIcon}>
-          <FontAwesome name={iconName} size={18} color={Color.gray200} />
+          <FontAwesome
+            name={iconName}
+            size={18}
+            color={Color.textInputIconGrays}
+          />
         </View>
         <TextInput style={inputStyle} {...props} />
-        <Pressable onPress={onPress} style={styles.passwordShowToggle}>
-          <Ionicons name="eye" size={18} color={Color.gray200} />
+        <Pressable
+          onPress={onPress}
+          style={({ pressed }) =>
+            pressed
+              ? [styles.passwordShowToggle, styles.pressed]
+              : styles.passwordShowToggle
+          }
+        >
+          {secure ? (
+            <Ionicons name="eye" size={20} color={Color.textInputIconGrays} />
+          ) : (
+            <Ionicons
+              name="eye-off"
+              size={20}
+              color={Color.textInputIconGrays}
+            />
+          )}
         </Pressable>
       </View>
     );
@@ -34,7 +54,11 @@ export default function Input({
           <Text style={inputTextStyle}>{text}</Text>
         </View>
         <View style={styles.placeholderIcon}>
-          <FontAwesome name={iconName} size={18} color={Color.gray200} />
+          <FontAwesome
+            name={iconName}
+            size={18}
+            color={Color.textInputIconGrays}
+          />
         </View>
         <TextInput style={inputStyle} {...props} />
       </View>
@@ -59,5 +83,8 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 30,
     right: 15,
+  },
+  pressed: {
+    opacity: 0.5,
   },
 });

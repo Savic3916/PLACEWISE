@@ -12,8 +12,8 @@ export default function Button({
   hasIcon,
   imageSource,
   text,
-  buttonContainerWIthIcon,
-  buttonContainerWIthoutIcons,
+  buttonContainerWithIcon,
+  buttonContainerWithoutIcons,
   textStyle,
   onPress,
 }) {
@@ -22,8 +22,8 @@ export default function Button({
       <Pressable
         style={({ pressed }) =>
           pressed
-            ? [buttonContainerWIthIcon, styles.pressed]
-            : buttonContainerWIthIcon
+            ? [buttonContainerWithIcon, styles.pressed]
+            : buttonContainerWithIcon
         }
         onPress={onPress}
         android_ripple={{ color: Color.supportingButtonRed, borderless: true }}
@@ -39,8 +39,8 @@ export default function Button({
       <Pressable
         style={({ pressed }) =>
           pressed
-            ? [buttonContainerWIthoutIcons, styles.pressed]
-            : buttonContainerWIthoutIcons
+            ? [buttonContainerWithoutIcons, styles.pressed]
+            : buttonContainerWithoutIcons
         }
         onPress={onPress}
         android_ripple={{ color: Color.supportingButtonRed, borderless: true }}
