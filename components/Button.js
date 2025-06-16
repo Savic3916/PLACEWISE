@@ -15,6 +15,7 @@ export default function Button({
   buttonContainerWithIcon,
   buttonContainerWithoutIcons,
   textStyle,
+  tintColor,
   onPress,
 }) {
   if (hasIcon === true) {
@@ -32,7 +33,10 @@ export default function Button({
         }}
       >
         <View style={styles.buttonView}>
-          <Image style={styles.image} source={imageSource} />
+          <Image
+            style={[styles.image, { tintColor: tintColor }]}
+            source={imageSource}
+          />
           <Text style={textStyle}>{text}</Text>
         </View>
       </Pressable>

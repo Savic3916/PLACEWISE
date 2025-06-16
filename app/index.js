@@ -42,6 +42,7 @@ export default function FirstScreen({}) {
             fontWeight: "500",
             fontSize: deviceWidth < 321 ? 14 : 15,
           }}
+          tintColor={Color.black}
           onPress={purchaseHomeButtonHandler}
         />
         <Button
@@ -53,6 +54,7 @@ export default function FirstScreen({}) {
             fontWeight: "500",
             fontSize: deviceWidth < 321 ? 14 : 15,
           }}
+          tintColor={Color.black}
           onPress={rentHomeButtonHandler}
         />
         <Button
@@ -64,6 +66,7 @@ export default function FirstScreen({}) {
             fontWeight: "500",
             fontSize: deviceWidth < 321 ? 14 : 15,
           }}
+          tintColor={Color.black}
           onPress={saleHomeButtonHandler}
         />
       </View>
@@ -73,7 +76,8 @@ export default function FirstScreen({}) {
           buttonContainerWithoutIcons={styles.buttonContainerWithoutIcons}
           text="SKIP"
           textStyle={{
-            fontWeight: "500",
+            fontFamily: "SpaceMono-Regular",
+            fontWeight: "bold",
             fontSize: deviceWidth < 321 ? 15 : 18,
             color: Color.white,
             letterSpacing: 5,
@@ -115,8 +119,8 @@ const styles = StyleSheet.create({
   buttonContainerWithIcons: {
     paddingVertical: deviceWidth < 321 ? 8 : 10,
     paddingHorizontal: deviceWidth < 321 ? "8%" : "10%",
-    backgroundColor: Color.white,
-    borderColor: Color.grayOutline,
+    backgroundColor: Color.secondaryButtonTeal,
+    borderColor: Color.secondaryButtonTeal,
     borderWidth: 2,
     borderRadius: 8,
     marginVertical: 6,

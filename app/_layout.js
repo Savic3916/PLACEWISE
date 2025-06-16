@@ -7,8 +7,9 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
-    Sedan: require("../assets/fonts/Sedan-Regular.ttf"),
+    'Sedan': require("../assets/fonts/Sedan-Regular.ttf"),
     "Sedan-Italic": require("../assets/fonts/Sedan-Regular.ttf"),
+    "SpaceMono-Regular": require("../assets/fonts/SpaceMono-Regular.ttf"),
   });
 
   useEffect(() => {

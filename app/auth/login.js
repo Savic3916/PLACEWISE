@@ -1,9 +1,8 @@
 import { StyleSheet, Text, View, Dimensions, Pressable } from "react-native";
-import React, { useState } from "react";
+import { useState } from "react";
 import Color from "../../constants/Color";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
-import { router } from "expo-router";
 import { Link } from "expo-router";
 
 const deviceWidth = Dimensions.get("window").width;
@@ -49,7 +48,7 @@ export default function Login({}) {
       </View>
       <Button
         hasIcon={false}
-        text="Login"
+        text="LOGIN"
         onPress={buttonHandler}
         buttonContainerWithoutIcons={styles.buttonContainerWithoutIcons}
         textStyle={styles.buttonText}
@@ -166,8 +165,8 @@ const styles = StyleSheet.create({
   buttonContainerWithIcons: {
     paddingVertical: deviceWidth < 321 ? 8 : 10,
     paddingHorizontal: deviceWidth < 321 ? "8%" : "10%",
-    backgroundColor: Color.supportingSecondaryButtonTeal,
-    borderColor: Color.supportingSecondaryButtonTeal,
+    backgroundColor: Color.secondaryButtonTeal,
+    borderColor: Color.secondaryButtonTeal,
     borderWidth: 2,
     borderRadius: 12,
     marginVertical: 6,
