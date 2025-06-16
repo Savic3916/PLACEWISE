@@ -1,8 +1,10 @@
-import { StyleSheet, Text, View, Dimensions, TextInput } from "react-native";
+import { StyleSheet, Text, View, Dimensions, Pressable } from "react-native";
 import React, { useState } from "react";
 import Color from "../../constants/Color";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
+import { router } from "expo-router";
+import { Link } from "expo-router";
 
 const deviceWidth = Dimensions.get("window").width;
 const deviceHeight = Dimensions.get("window").height;
@@ -60,7 +62,7 @@ export default function Login({}) {
         }}
       >
         <View style={styles.line} />
-        <Text> or </Text>
+        <Text style={{ color: Color.textInputIconGrays }}> or </Text>
         <View style={styles.line} />
       </View>
       <Button
@@ -83,7 +85,18 @@ export default function Login({}) {
           fontSize: deviceWidth < 321 ? 14 : 15,
         }}
       />
-      <Text>Don't have an account? </Text>
+      <View style={styles.bottomTextContainer}>
+        <Text style={styles.bottomText}>Don't have an account? </Text>
+        <Link
+          href="/auth/signup"
+          style={[
+            styles.bottomText,
+            { fontWeight: "bold", color: Color.buttonRed },
+          ]}
+        >
+          Register
+        </Link>
+      </View>
     </View>
   );
 }
@@ -162,5 +175,17 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 1, height: 1 },
     shadowOpacity: 0.3,
     shadowRadius: 3,
+  },
+  bottomTextContainer: {
+    marginTop: "5%",
+    flexDirection: "row",
+    justifyContent: "center",
+  },
+  bottomText: {
+    fontWeight: "600",
+  },
+  pressed: {
+    opacity: 0.65,
+    color: Color.supportingButtonRed,
   },
 });

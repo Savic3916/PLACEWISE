@@ -22,11 +22,14 @@ export default function Button({
       <Pressable
         style={({ pressed }) =>
           pressed
-            ? [buttonContainerWithIcon, styles.pressed]
+            ? [buttonContainerWithIcon, styles.hasIconPressed]
             : buttonContainerWithIcon
         }
         onPress={onPress}
-        android_ripple={{ color: Color.supportingButtonRed, borderless: true }}
+        android_ripple={{
+          color: Color.supportingSecondaryButtonTeal,
+          borderless: true,
+        }}
       >
         <View style={styles.buttonView}>
           <Image style={styles.image} source={imageSource} />
@@ -39,7 +42,7 @@ export default function Button({
       <Pressable
         style={({ pressed }) =>
           pressed
-            ? [buttonContainerWithoutIcons, styles.pressed]
+            ? [buttonContainerWithoutIcons, styles.hasNoIconPressed]
             : buttonContainerWithoutIcons
         }
         onPress={onPress}
@@ -63,7 +66,12 @@ const styles = StyleSheet.create({
     height: deviceWidth < 321 ? 18 : 25,
     marginRight: "20%",
   },
-  pressed: {
+  hasIconPressed: {
+    opacity: 0.5,
+    overflow: "hidden",
+    backgroundColor: Color.supportingSecondaryButtonTeal,
+  },
+  hasNoIconPressed: {
     opacity: 0.5,
     overflow: "hidden",
     backgroundColor: Color.supportingButtonRed,
