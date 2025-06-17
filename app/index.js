@@ -20,7 +20,7 @@ export default function FirstScreen({}) {
   }
 
   function skipButtonHander() {
-    router.navigate("/auth/login");
+    router.navigate("/auth/signup");
   }
 
   return (
