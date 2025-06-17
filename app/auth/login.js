@@ -6,7 +6,6 @@ import Button from "../../components/Button";
 import { Link } from "expo-router";
 
 const deviceWidth = Dimensions.get("window").width;
-const deviceHeight = Dimensions.get("window").height;
 
 export default function Login({}) {
   const [secure, setSecure] = useState(true);
@@ -23,7 +22,7 @@ export default function Login({}) {
       <View style={styles.container}>
         <Text style={styles.firstScreenText}>Welcome Back to</Text>
         <Text style={styles.placeWiseText}>PLACEWISE</Text>
-        <Text style={{ color: Color.textInputIconGrays, fontWeight: "600" }}>
+        <Text style={{ color: Color.textInputIconGrays, fontWeight: "600", fontSize: deviceWidth < 321 ? 9 : 14, }}>
           Hey there, Sign in to continue
         </Text>
       </View>
@@ -68,6 +67,7 @@ export default function Login({}) {
         hasIcon={true}
         buttonContainerWithIcon={styles.buttonContainerWithIcons}
         imageSource={require("../../assets/images/communication.png")}
+        imageStyle={styles.buttonImage}
         text="Sign in with Google"
         textStyle={{
           fontWeight: "500",
@@ -78,6 +78,7 @@ export default function Login({}) {
         hasIcon={true}
         buttonContainerWithIcon={styles.buttonContainerWithIcons}
         imageSource={require("../../assets/images/google.png")}
+        imageStyle={styles.buttonImage}
         text="Sign in with Facebook"
         textStyle={{
           fontWeight: "500",
@@ -107,34 +108,42 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   container: {
-    marginTop: "15%",
-    alignItems: "center",
+     marginTop: deviceWidth < 321 ? "5%" : "15%",
+     alignItems: "center",
   },
   firstScreenText: {
     fontFamily: "SpaceMono-Regular",
-    fontSize: 15,
+    fontSize: deviceWidth < 321 ? 9 : 15,
     letterSpacing: 2,
   },
   placeWiseText: {
     fontFamily: "Poppins-Black",
-    fontSize: 35,
-    marginBottom: "3%",
+    fontSize: deviceWidth < 321 ? 20 : 35,
+    marginBottom: deviceWidth < 321 ? "0%":"3%",
     letterSpacing: 3,
   },
   image: {
     flex: 1,
     justifyContent: "center",
   },
+  buttonImage: {
+    width: deviceWidth < 321 ? 18 : 25,
+    height: deviceWidth < 321 ? 18 : 25,
+    marginRight: "10%",
+    marginLeft: '15%'
+  },
   input: {
-    marginVertical: "4%",
+    marginVertical: deviceWidth < 321 ? "2%" : "4%",
     borderColor: Color.buttonRed,
-    padding: 15,
+    padding: deviceWidth < 321 ? 12 : 15,
     paddingLeft: "15%",
     borderWidth: 2,
     borderRadius: 20,
+    fontSize: deviceWidth < 321 ? 12 : 14,
   },
   inputText: {
     color: Color.buttonRed,
+    fontSize: deviceWidth < 321 ? 11 : 14,
   },
   buttonContainerWithoutIcons: {
     paddingVertical: deviceWidth < 321 ? 8 : 10,
@@ -143,7 +152,7 @@ const styles = StyleSheet.create({
     borderColor: Color.buttonRed,
     borderWidth: 2,
     borderRadius: 12,
-    marginVertical: "4%",
+    marginVertical: deviceWidth < 321 ? "2%" : "4%",
     shadowColor: "black",
     shadowOffset: { width: 1, height: 1 },
     shadowOpacity: 0.3,
@@ -176,7 +185,7 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
   },
   bottomTextContainer: {
-    marginTop: "5%",
+    marginTop: deviceWidth < 321 ? "2%" : "5%",
     flexDirection: "row",
     justifyContent: "center",
   },

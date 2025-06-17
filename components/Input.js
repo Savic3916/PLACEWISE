@@ -1,7 +1,16 @@
-import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  Dimensions,
+} from "react-native";
 import Color from "../constants/Color";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Ionicons from "@expo/vector-icons/Ionicons";
+
+const deviceWidth = Dimensions.get("window").width;
 
 export default function Input({
   hasPassword,
@@ -22,7 +31,7 @@ export default function Input({
         <View style={styles.placeholderIcon}>
           <FontAwesome
             name={iconName}
-            size={18}
+            size={deviceWidth < 321 ? 14 : 18}
             color={Color.textInputIconGrays}
           />
         </View>
@@ -36,11 +45,15 @@ export default function Input({
           }
         >
           {secure ? (
-            <Ionicons name="eye" size={20} color={Color.textInputIconGrays} />
+            <Ionicons
+              name="eye"
+              size={deviceWidth < 321 ? 16 : 20}
+              color={Color.textInputIconGrays}
+            />
           ) : (
             <Ionicons
               name="eye-off"
-              size={20}
+              size={deviceWidth < 321 ? 16 : 20}
               color={Color.textInputIconGrays}
             />
           )}
@@ -56,7 +69,7 @@ export default function Input({
         <View style={styles.placeholderIcon}>
           <FontAwesome
             name={iconName}
-            size={18}
+            size={deviceWidth < 321 ? 14 : 18}
             color={Color.textInputIconGrays}
           />
         </View>
@@ -73,15 +86,16 @@ const styles = StyleSheet.create({
     position: "absolute",
     padding: 5,
     left: 20,
+    top: deviceWidth < 321 ? -5 : 0,
   },
   placeholderIcon: {
     position: "absolute",
     left: 20,
-    top: 35,
+    top: deviceWidth < 321 ? 23 : 35,
   },
   passwordShowToggle: {
     position: "absolute",
-    top: 30,
+    top: deviceWidth < 321 ? 23 : 30,
     right: 15,
   },
   pressed: {

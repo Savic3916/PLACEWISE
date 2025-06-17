@@ -10,10 +10,16 @@ const deviceWidth = Dimensions.get("window").width;
 
 export default function Register({}) {
   const [secure, setSecure] = useState(true);
+  const [secureTwo, setSecureTwo] = useState(true);
 
   function showHidePasswordHandler() {
     setSecure(!secure);
   }
+
+  function showHidePasswordHandlerTwo() {
+    setSecureTwo(!secureTwo)
+  }
+
   function buttonHandler() {
     console.log("Pressed");
   }
@@ -21,19 +27,19 @@ export default function Register({}) {
   return (
     <View style={styles.screen}>
       <View style={styles.container}>
-        {/* <Text style={styles.firstScreenText}>Welcome to</Text> */}
         <Text style={styles.placeWiseText}>PLACEWISE</Text>
         <Text
           style={{
             color: Color.textInputIconGrays,
             fontWeight: "600",
             letterSpacing: 1,
+            fontSize: deviceWidth < 321 ? 9 : 14,
           }}
         >
           Hey there, Sign up to continue...
         </Text>
       </View>
-      <View style={{ marginTop: "2%" }}>
+      <View style={{ marginTop: deviceWidth < 321 ? "0%" : "2%" }}>
         <Input
           text="Email Address"
           inputStyle={styles.input}
@@ -57,9 +63,9 @@ export default function Register({}) {
           inputStyle={styles.input}
           inputTextStyle={styles.inputText}
           iconName="lock"
-          onPress={showHidePasswordHandler}
-          props={{ secureTextEntry: secure }}
-          secure={secure}
+          onPress={showHidePasswordHandlerTwo}
+          props={{ secureTextEntry: secureTwo }}
+          secure={secureTwo}
         />
       </View>
       <View style={{ flexDirection: "row" }}>
@@ -86,7 +92,7 @@ export default function Register({}) {
         style={{
           flexDirection: "row",
           alignItems: "center",
-          marginVertical: "3%",
+          marginVertical: deviceWidth < 321 ? "0%" : "3%",
         }}
       >
         <View style={styles.line} />
@@ -97,6 +103,7 @@ export default function Register({}) {
         hasIcon={true}
         buttonContainerWithIcon={styles.buttonContainerWithIcons}
         imageSource={require("../../assets/images/communication.png")}
+        imageStyle={styles.buttonImage}
         text="Sign up with Google"
         textStyle={{
           fontWeight: "500",
@@ -107,6 +114,7 @@ export default function Register({}) {
         hasIcon={true}
         buttonContainerWithIcon={styles.buttonContainerWithIcons}
         imageSource={require("../../assets/images/google.png")}
+        imageStyle={styles.buttonImage}
         text="Sign up with Facebook"
         textStyle={{
           fontWeight: "500",
@@ -136,33 +144,36 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   container: {
-    marginTop: "5%",
+    marginTop: deviceWidth < 321 ? "0%" : "4%",
     alignItems: "center",
-  },
-  firstScreenText: {
-    fontFamily: "SpaceMono-Regular",
-    fontSize: 15,
-    letterSpacing: 2,
   },
   placeWiseText: {
     fontFamily: "Poppins-Black",
-    fontSize: 35,
+    fontSize: deviceWidth < 321 ? 20 : 35,
     letterSpacing: 3,
   },
   image: {
     flex: 1,
     justifyContent: "center",
   },
+  buttonImage: {
+    width: deviceWidth < 321 ? 18 : 25,
+    height: deviceWidth < 321 ? 18 : 25,
+    marginRight: "10%",
+    marginLeft: "15%",
+  },
   input: {
-    marginVertical: "4%",
+    marginVertical: deviceWidth < 321 ? "2%" : "4%",
     borderColor: Color.buttonRed,
-    padding: 15,
+    padding: deviceWidth < 321 ? 12 : 15,
     paddingLeft: "15%",
     borderWidth: 2,
     borderRadius: 20,
+    fontSize: deviceWidth < 321 ? 12 : 14,
   },
   inputText: {
     color: Color.buttonRed,
+    fontSize: deviceWidth < 321 ? 11 : 14,
   },
   buttonContainerWithoutIcons: {
     paddingVertical: deviceWidth < 321 ? 8 : 10,
@@ -171,7 +182,7 @@ const styles = StyleSheet.create({
     borderColor: Color.buttonRed,
     borderWidth: 2,
     borderRadius: 12,
-    marginVertical: "4%",
+    marginVertical: deviceWidth < 321 ? "2%" : "4%",
     shadowColor: "black",
     shadowOffset: { width: 1, height: 1 },
     shadowOpacity: 0.3,
@@ -204,7 +215,7 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
   },
   bottomTextContainer: {
-    marginTop: "5%",
+    marginTop: deviceWidth < 321 ? "2%" : "3%",
     flexDirection: "row",
     justifyContent: "center",
   },
@@ -216,7 +227,7 @@ const styles = StyleSheet.create({
     color: Color.supportingButtonRed,
   },
   agreementText: {
-    fontSize: 12,
+    fontSize: deviceWidth < 321 ? 10 : 12,
   },
   checkbox: {
     marginHorizontal: 5,

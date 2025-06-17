@@ -37,36 +37,36 @@ export default function FirstScreen({}) {
           hasIcon={true}
           buttonContainerWithIcon={styles.buttonContainerWithIcons}
           imageSource={require("../assets/images/real-estate.png")}
+          imageStyle={styles.buttonImage}
           text="Purchase a home"
           textStyle={{
             fontWeight: "500",
             fontSize: deviceWidth < 321 ? 14 : 15,
           }}
-          tintColor={Color.black}
           onPress={purchaseHomeButtonHandler}
         />
         <Button
           hasIcon={true}
           buttonContainerWithIcon={styles.buttonContainerWithIcons}
           imageSource={require("../assets/images/rent.png")}
+          imageStyle={styles.buttonImage}
           text="Rent a home"
           textStyle={{
             fontWeight: "500",
             fontSize: deviceWidth < 321 ? 14 : 15,
           }}
-          tintColor={Color.black}
           onPress={rentHomeButtonHandler}
         />
         <Button
           hasIcon={true}
           buttonContainerWithIcon={styles.buttonContainerWithIcons}
           imageSource={require("../assets/images/sale.png")}
+          imageStyle={styles.buttonImage}
           text="Sale a home"
           textStyle={{
             fontWeight: "500",
             fontSize: deviceWidth < 321 ? 14 : 15,
           }}
-          tintColor={Color.black}
           onPress={saleHomeButtonHandler}
         />
       </View>
@@ -143,4 +143,10 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
     alignItems: "center",
   },
+  buttonImage: {
+    width: deviceWidth < 321 ? 18 : 25,
+    height: deviceWidth < 321 ? 18 : 25,
+    marginRight: "20%",
+    tintColor: Color.black,
+  }
 });

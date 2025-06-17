@@ -11,11 +11,11 @@ import Color from "@/constants/Color";
 export default function Button({
   hasIcon,
   imageSource,
+  imageStyle,
   text,
   buttonContainerWithIcon,
   buttonContainerWithoutIcons,
   textStyle,
-  tintColor,
   onPress,
 }) {
   if (hasIcon === true) {
@@ -34,7 +34,7 @@ export default function Button({
       >
         <View style={styles.buttonView}>
           <Image
-            style={[styles.image, { tintColor: tintColor }]}
+            style={imageStyle}
             source={imageSource}
           />
           <Text style={textStyle}>{text}</Text>
@@ -64,11 +64,6 @@ const styles = StyleSheet.create({
   buttonView: {
     flexDirection: "row",
     alignItems: "center",
-  },
-  image: {
-    width: deviceWidth < 321 ? 18 : 25,
-    height: deviceWidth < 321 ? 18 : 25,
-    marginRight: "20%",
   },
   hasIconPressed: {
     opacity: 0.5,
