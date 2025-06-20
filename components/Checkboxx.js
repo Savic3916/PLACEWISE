@@ -4,7 +4,6 @@ import Color from "../constants/Color";
 
 export default function Checkboxx({ checkboxStyle }) {
   const [isChecked, setChecked] = useState(false);
-  console.log(isChecked);
 
   return (
     <Checkbox

@@ -11,13 +11,24 @@ const deviceWidth = Dimensions.get("window").width;
 export default function Register({}) {
   const [secure, setSecure] = useState(true);
   const [secureTwo, setSecureTwo] = useState(true);
+  const [userInputs, setUserInputs] = useState({
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  function userInputsChangeHandler(inputIdentifier, enteredText) {
+    setUserInputs((currentInput) => {
+      return { ...currentInput, [inputIdentifier]: enteredText };
+    });
+  }
 
   function showHidePasswordHandler() {
     setSecure(!secure);
   }
 
   function showHidePasswordHandlerTwo() {
-    setSecureTwo(!secureTwo)
+    setSecureTwo(!secureTwo);
   }
 
   function buttonHandler() {
@@ -45,7 +56,11 @@ export default function Register({}) {
           inputStyle={styles.input}
           inputTextStyle={styles.inputText}
           iconName="envelope"
-          props={{}}
+          props={{
+            onChangeText: (enteredText) =>
+              userInputsChangeHandler("email", enteredText),
+            value: userInputs.email,
+          }}
         />
         <Input
           hasPassword={true}
@@ -54,7 +69,12 @@ export default function Register({}) {
           inputTextStyle={styles.inputText}
           iconName="lock"
           onPress={showHidePasswordHandler}
-          props={{ secureTextEntry: secure }}
+          props={{
+            secureTextEntry: secure,
+            onChangeText: (enteredText) =>
+              userInputsChangeHandler("password", enteredText),
+            value: userInputs.password,
+          }}
           secure={secure}
         />
         <Input
@@ -64,7 +84,12 @@ export default function Register({}) {
           inputTextStyle={styles.inputText}
           iconName="lock"
           onPress={showHidePasswordHandlerTwo}
-          props={{ secureTextEntry: secureTwo }}
+          props={{
+            secureTextEntry: secureTwo,
+            onChangeText: (enteredText) =>
+              userInputsChangeHandler("confirmPassword", enteredText),
+            value: userInputs.confirmPassword,
+          }}
           secure={secureTwo}
         />
       </View>
