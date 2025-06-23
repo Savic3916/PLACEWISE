@@ -113,10 +113,14 @@ export default function Login({}) {
           }}
           secure={secure}
         />
-        {!userInputs.password.isValid && (
-          <Text style={styles.errorText}>
-            password must contain letters, special character and number{" "}
-          </Text>
+        {!userInputs.password.isValid && userInputs.password.data.length < 8 ? (
+          <Text style={styles.errorText}>password must be more than 8 </Text>
+        ) : (
+          !userInputs.password.isValid && (
+            <Text style={styles.errorText}>
+              password must contain letters, special character and number{" "}
+            </Text>
+          )
         )}
       </View>
       <Button
@@ -182,7 +186,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   container: {
-    marginTop: deviceWidth < 321 ? "5%" :  deviceWidth < 376 ? "8%" : "15%",
+    marginTop: deviceWidth < 321 ? "5%" : deviceWidth < 376 ? "8%" : "15%",
     alignItems: "center",
   },
   firstScreenText: {
@@ -273,8 +277,8 @@ const styles = StyleSheet.create({
   errorText: {
     color: "red",
     marginTop: "-2.5%",
-    marginBottom: '1%',
+    marginBottom: "1%",
     fontSize: deviceWidth < 321 ? 11 : 12.5,
-    textAlign: "center",
+    // textAlign: "center",
   },
 });

@@ -9,17 +9,23 @@ import Checkboxx from "../../components/Checkboxx";
 const deviceWidth = Dimensions.get("window").width;
 
 export default function Register({}) {
+  const [isChecked, setChecked] = useState(false);
   const [secure, setSecure] = useState(true);
   const [secureTwo, setSecureTwo] = useState(true);
   const [userInputs, setUserInputs] = useState({
-    email: "",
-    password: "",
-    confirmPassword: "",
+    email: { data: "", isValid: true },
+    password: { data: "", isValid: true },
+    confirmPassword: { data: "", isValid: true },
   });
 
+  console.log(isChecked);
+
   function userInputsChangeHandler(inputIdentifier, enteredText) {
-    setUserInputs((currentInput) => {
-      return { ...currentInput, [inputIdentifier]: enteredText };
+    setUserInputs((currentInputs) => {
+      return {
+        ...currentInputs,
+        [inputIdentifier]: { data: enteredText, isValid: true },
+      };
     });
   }
 
@@ -31,8 +37,70 @@ export default function Register({}) {
     setSecureTwo(!secureTwo);
   }
 
-  function buttonHandler() {
-    console.log("Pressed");
+  function signupButtonHandler() {
+    let userDetails = {
+      email: userInputs.email.data,
+      password: userInputs.password.data,
+      confirmPassword: userInputs.confirmPassword.data,
+    };
+
+    // validate
+    let emailIsValid =
+      userDetails.email.trim().length > 0 &&
+      userDetails.email.includes("@") &&
+      userDetails.email.substring(0, userDetails.email.match("@").index)
+        .length > 0;
+
+    let passwordIsValid =
+      userDetails.password.trim().length > 8 &&
+      userDetails.password.search(/[@!#$%^&*()\-\_=+\|{};:\/?.><~]/) !== -1 &&
+      userDetails.password.search(/[0-9]/) !== -1 &&
+      userDetails.password.search(/[a-z]/) !== -1;
+
+    let confirmPasswordIsValid =
+      userDetails.password.trim().length > 8 &&
+      userDetails.confirmPassword.search(/[@!#$%^&*()\-\_=+\|{};:\/?.><~]/) !==
+        -1 &&
+      userDetails.confirmPassword.search(/[0-9]/) !== -1 &&
+      userDetails.confirmPassword.search(/[a-z]/) !== -1 &&
+      userDetails.confirmPassword === userDetails.password;
+
+    if (!emailIsValid) {
+      setUserInputs((currentInput) => {
+        return {
+          ...currentInput,
+          ["email"]: { data: userDetails.email, isValid: false },
+        };
+      });
+    }
+
+    if (!passwordIsValid) {
+      setUserInputs((currentInput) => {
+        return {
+          ...currentInput,
+          ["password"]: { data: userDetails.password, isValid: false },
+        };
+      });
+    }
+
+    if (!confirmPasswordIsValid) {
+      setUserInputs((currentInput) => {
+        return {
+          ...currentInput,
+          ["confirmPassword"]: {
+            data: userDetails.confirmPassword,
+            isValid: false,
+          },
+        };
+      });
+    }
+
+    if (!isChecked) {
+      return;
+    }
+
+    // if it is validated, work....
+    console.log("Everything is valid!");
   }
 
   return (
@@ -59,9 +127,16 @@ export default function Register({}) {
           props={{
             onChangeText: (enteredText) =>
               userInputsChangeHandler("email", enteredText),
-            value: userInputs.email,
+            value: userInputs.email.data,
           }}
         />
+
+        {/* email error message */}
+        {!userInputs.email.isValid && (
+          <Text style={styles.errorText}>
+            email must contain at least one letter before the '@' symbol
+          </Text>
+        )}
         <Input
           hasPassword={true}
           text="Password"
@@ -73,10 +148,23 @@ export default function Register({}) {
             secureTextEntry: secure,
             onChangeText: (enteredText) =>
               userInputsChangeHandler("password", enteredText),
-            value: userInputs.password,
+            value: userInputs.password.data,
           }}
           secure={secure}
         />
+
+        {/* password error message */}
+        {!userInputs.password.isValid && userInputs.password.data.length < 8 ? (
+          <Text style={styles.errorText}>
+            password must be more than 8 characters
+          </Text>
+        ) : (
+          !userInputs.password.isValid && (
+            <Text style={styles.errorText}>
+              password must contain letters, special character and number
+            </Text>
+          )
+        )}
         <Input
           hasPassword={true}
           text="Cofirm Password"
@@ -88,16 +176,37 @@ export default function Register({}) {
             secureTextEntry: secureTwo,
             onChangeText: (enteredText) =>
               userInputsChangeHandler("confirmPassword", enteredText),
-            value: userInputs.confirmPassword,
+            value: userInputs.confirmPassword.data,
           }}
           secure={secureTwo}
         />
+
+        {/* confirmpassword error message */}
+        {!userInputs.confirmPassword.isValid &&
+        userInputs.confirmPassword.data.length < 8 ? (
+          <Text style={styles.errorText}>
+            password must be more than 8 characters
+          </Text>
+        ) : !userInputs.confirmPassword.isValid &&
+          userInputs.confirmPassword.data !== userInputs.password.data ? (
+          <Text style={styles.errorText}>Password mismatch</Text>
+        ) : (
+          !userInputs.password.isValid && (
+            <Text style={styles.errorText}>
+              password must contain letters, special character and number
+            </Text>
+          )
+        )}
       </View>
       <View style={{ flexDirection: "row" }}>
-        <Checkboxx checkboxStyle={styles.checkbox} />
+        <Checkboxx
+          checkboxStyle={styles.checkbox}
+          isChecked={isChecked}
+          setChecked={setChecked}
+        />
         <Text style={styles.agreementText}>I have read and I agree to </Text>
         <Link
-          href=""
+          href="/auth/useragreement"
           style={[
             styles.agreementText,
             { color: Color.buttonRed, fontWeight: "bold" },
@@ -106,10 +215,15 @@ export default function Register({}) {
           User Agreement Privacy Policy
         </Link>
       </View>
+
+      {/* user agreement error message */}
+      {!isChecked && (
+        <Text style={styles.errorText}> Please tick the box to continue </Text>
+      )}
       <Button
         hasIcon={false}
         text="REGISTER"
-        onPress={buttonHandler}
+        onPress={signupButtonHandler}
         buttonContainerWithoutIcons={styles.buttonContainerWithoutIcons}
         textStyle={styles.buttonText}
       />
@@ -253,8 +367,16 @@ const styles = StyleSheet.create({
   },
   agreementText: {
     fontSize: deviceWidth < 321 ? 10 : 12,
+    marginBottom: "3%",
   },
   checkbox: {
     marginHorizontal: 5,
+  },
+  errorText: {
+    color: "red",
+    marginTop: "-2.5%",
+    marginBottom: "1%",
+    fontSize: deviceWidth < 321 ? 11 : 12.5,
+    // textAlign: "center",
   },
 });

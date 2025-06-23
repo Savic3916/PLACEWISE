@@ -46,13 +46,13 @@ export default function Input({
         >
           {secure ? (
             <Ionicons
-              name="eye"
+              name="eye-off"
               size={deviceWidth < 321 ? 16 : 20}
               color={Color.textInputIconGrays}
             />
           ) : (
             <Ionicons
-              name="eye-off"
+              name="eye"
               size={deviceWidth < 321 ? 16 : 20}
               color={Color.textInputIconGrays}
             />
