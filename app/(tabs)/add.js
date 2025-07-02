@@ -1,13 +1,10 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { Stack } from 'expo-router'
 
-export default function HomeScreen() {
+export default function AddTab() {
   return (
     <View>
-      <View>
-        <Text> hello </Text>
-      </View>
+      <Text>add</Text>
     </View>
   )
 }

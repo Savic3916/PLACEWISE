@@ -87,6 +87,7 @@ const styles = StyleSheet.create({
     padding: 5,
     left: 20,
     top: deviceWidth < 321 ? -5 : 0,
+    zIndex: 1,
   },
   placeholderIcon: {
     position: "absolute",

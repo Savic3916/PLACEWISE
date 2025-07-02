@@ -1,7 +1,9 @@
 import { StyleSheet, Text, View, Dimensions } from "react-native";
 import { router } from "expo-router";
+import { StatusBar } from 'expo-status-bar';
 import Color from "../constants/Color";
 import Button from "../components/Button";
+
 
 const deviceWidth = Dimensions.get("window").width;
 const deviceHeight = Dimensions.get("window").height;
@@ -25,6 +27,7 @@ export default function FirstScreen({}) {
 
   return (
     <View style={styles.container}>
+      <StatusBar style="dark"/>
       <View style={styles.textContainer}>
         <Text style={styles.mainText}>What are you looking for</Text>
         <Text style={styles.otherText}>
