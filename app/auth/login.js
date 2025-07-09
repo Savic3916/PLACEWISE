@@ -193,7 +193,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   container: {
-    marginTop: deviceWidth < 321 ? "5%" : deviceWidth < 376 ? "8%" : "20%",
+    marginTop: deviceWidth < 321 ? "5%" : "20%",
     alignItems: "center",
   },
   firstScreenText: {

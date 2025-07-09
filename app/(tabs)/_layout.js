@@ -1,14 +1,32 @@
-import { StyleSheet, View, Pressable } from "react-native";
-import { BlurView } from "expo-blur";
+import { StyleSheet, Pressable, Platform } from "react-native";
+import { useEffect } from "react";
 import { router, Tabs } from "expo-router";
+import { useFonts } from "expo-font";
 import Entypo from "@expo/vector-icons/Entypo";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import Color from "../../constants/Color";
+import * as SplashScreen from "expo-splash-screen";
+
+SplashScreen.preventAutoHideAsync();
 
 export default function TabLayout() {
+  const [loaded, error] = useFonts({
+    "SpaceMono-Regular": require("../../assets/fonts/SpaceMono-Regular.ttf"),
+  });
+
+  useEffect(() => {
+    if (loaded || error) {
+      SplashScreen.hideAsync();
+    }
+  }, [loaded, error]);
+
+  if (!loaded && !error) {
+    return null;
+  }
+
   return (
     <Tabs
       screenOptions={{
@@ -16,10 +34,12 @@ export default function TabLayout() {
         tabBarActiveTintColor: Color.buttonRed,
         tabBarLabelPosition: "below-icon",
         tabBarHideOnKeyboard: true,
-        tabBarStyle: { height: "8%" },
-        tabBarBackground: () => (
-          <BlurView tint="light" intensity={100} style={styles} />
-        ),
+        tabBarStyle:
+          Platform.OS === "ios"
+            ? { height: "8%" }
+            : Platform.OS === "android"
+            ? { height: "11%" }
+            : { height: "5%" },
       }}
     >
       <Tabs.Screen
@@ -57,7 +77,7 @@ export default function TabLayout() {
                     ? [styles.tabBarButton, styles.pressed]
                     : styles.tabBarButton
                 }
-                onPress={() => router.navigate('/add')}
+                onPress={() => router.navigate("/add")}
               >
                 <FontAwesome6 name="plus" size={35} color={Color.white} />
               </Pressable>
@@ -105,8 +125,8 @@ const styles = StyleSheet.create({
     height: 60,
     borderRadius: 60,
     position: "absolute",
-    bottom: 10,
-    right: 10,
+    bottom: "20%",
+    left: "10%",
   },
   pressed: {
     opacity: 0.5,
