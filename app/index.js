@@ -22,7 +22,7 @@ export default function FirstScreen({}) {
   }
 
   function skipButtonHander() {
-    router.navigate("/auth/signup");
+    router.navigate("/auth/login");
   }
 
   return (
