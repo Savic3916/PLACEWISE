@@ -23,7 +23,7 @@ A cross-platform React Native application designed to make it easy for **home bu
 - 🧠 Redux & React Context
 - 🛠️ Git
 - 💡 JavaScript (ES6+)
-- 
+  
 ---
 
 ## 🔧 Installation
@@ -38,7 +38,7 @@ A cross-platform React Native application designed to make it easy for **home bu
    ```bash
    npm install
    # or
-   yarn
+   yarn install
    ```
 
 3. **Run the app**
@@ -92,9 +92,7 @@ MIT License. See `LICENSE` file for more information.
 - In-app chat between buyers and sellers
 - Push notifications
 - Favorites and saved searches
-- Mortgage calculator
-- AI-based home recommendations
-
+- etc
 ---
 
 ## 📬 Contact
