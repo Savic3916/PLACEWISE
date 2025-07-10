@@ -17,12 +17,13 @@ A cross-platform React Native application designed to make it easy for **home bu
 
 ## 📦 Tech Stack
 
-- **React Native** (Expo)
-- **Firebase** / Supabase (Authentication & Backend)
-- **Expo Router**
-- **Styled Components** / Tailwind CSS (via NativeWind)
-- **Redux Toolkit** (for state management)
-
+- ⚛️ React Native
+- 🚀 Expo
+- 🔥 Firebase (Firestore & Auth)
+- 🧠 Redux & React Context
+- 🛠️ Git
+- 💡 JavaScript (ES6+)
+- 
 ---
 
 ## 🔧 Installation
