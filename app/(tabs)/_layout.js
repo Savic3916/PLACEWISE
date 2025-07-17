@@ -15,6 +15,9 @@ SplashScreen.preventAutoHideAsync();
 export default function TabLayout() {
   const [loaded, error] = useFonts({
     "SpaceMono-Regular": require("../../assets/fonts/SpaceMono-Regular.ttf"),
+    "SpaceMono-Bold": require("../../assets/fonts/SpaceMono-Bold.ttf"),
+    "Sedan": require("../../assets/fonts/Sedan-Regular.ttf"),
+    "Sedan-Italic": require("../../assets/fonts/Sedan-Regular.ttf"),
   });
 
   useEffect(() => {
@@ -34,12 +37,9 @@ export default function TabLayout() {
         tabBarActiveTintColor: Color.buttonRed,
         tabBarLabelPosition: "below-icon",
         tabBarHideOnKeyboard: true,
-        tabBarStyle:
-          Platform.OS === "ios"
-            ? { height: "8%" }
-            : Platform.OS === "android"
-            ? { height: "11%" }
-            : { height: "5%" },
+        tabBarStyle: {
+          backgroundColor: Color.white,
+        },
       }}
     >
       <Tabs.Screen
@@ -79,7 +79,7 @@ export default function TabLayout() {
                 }
                 onPress={() => router.navigate("/add")}
               >
-                <FontAwesome6 name="plus" size={35} color={Color.white} />
+                <FontAwesome6 name="plus" size={40} color={Color.white} />
               </Pressable>
             );
           },
@@ -121,12 +121,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: Color.supportingSecondaryButtonTeal,
-    width: 60,
-    height: 60,
+    width: 80,
+    height: 80,
     borderRadius: 60,
     position: "absolute",
-    bottom: "20%",
-    left: "10%",
+    bottom: "22%",
+    // left: "10%",
+    elevation: 3,
+    shadowColor: Color.black,
+    shadowOffset: { height: 1, width: 1 },
+    shadowOpacity: 0.5,
+    shadowRadius: 1,
   },
   pressed: {
     opacity: 0.5,
