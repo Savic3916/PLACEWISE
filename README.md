@@ -38,7 +38,7 @@ A cross-platform React Native application designed to make it easy for **home bu
    ```bash
    npm install
    # or
-   yarn
+   yarn install
    ```
 
 3. **Run the app**
