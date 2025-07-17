@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 10,
     marginHorizontal: 3,
-    borderColor: Color.lighterGrayOutline,
+    borderColor: Color.black,
     borderWidth: 1,
     width: 100,
     height: 100,
@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
   },
   cardText: {
     fontSize: 12,
+    fontWeight: 'bold',
     textAlign: "center",
   },
   image: {
@@ -50,7 +51,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   pressed: {
-    backgroundColor: Color.supportingButtonRed,
+    backgroundColor: Color.supportingSecondaryButtonTeal,
     opacity: 0.5,
   },
 });
