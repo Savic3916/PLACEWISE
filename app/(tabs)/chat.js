@@ -3,10 +3,9 @@ import { useEffect } from "react";
 import { getCountryState } from "../../util/country_state_API";
 
 export default function ChatTab() {
-  
   return (
     <View>
-      <Text>Chat</Text>
+      <Text>Hello Chat</Text>
     </View>
   );
 }

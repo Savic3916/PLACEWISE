@@ -6,124 +6,48 @@ import {
   ScrollView,
   TouchableWithoutFeedback,
   Keyboard,
+  Platform,
+  StatusBar,
 } from "react-native";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getNigerianStateData } from "../../util/country_state_API";
+import { useSelector, useDispatch } from "react-redux";
 import Color from "../../constants/Color";
 import RectangularCard from "../../components/authenticatedComponents/RectangularCard";
 import Slider from "../../components/libraries/Slider";
 import BottomDemacatingLine from "../../components/authenticatedComponents/BottomDemacatingLine";
+import DropDownMenu from "../../components/libraries/DropDownMenu";
 
 export default function AddTab() {
   const [chooseTrade, setChooseTrade] = useState("");
   const [chooseHouseType, setChooseHouseType] = useState("");
   const [chooseBedroomNumber, setChooseBedroomNumber] = useState("");
   const [chooseBathroomNumber, setChooseBathroomNumber] = useState("");
+  const [chooseState, setChooseState] = useState([]);
+
+  // REDUX: APP WIDE STATE
+  const houseData = useSelector((state) => state.houseTypeData.houseData);
+  const roomData = useSelector((state) => state.houseTypeData.roomData);
 
   const topCardData = [
     { id: "Rent", text: "Rent Property" },
     { id: "Sell", text: "Sell Property" },
   ];
-  const houseTypeData = [
-    {
-      id: 1,
-      text: "House",
-      imageSource: require("../../assets/images/house.png"),
-    },
-    {
-      id: 2,
-      text: "Apartment",
-      imageSource: require("../../assets/images/apartment.png"),
-    },
-    {
-      id: 3,
-      text: "Duplex",
-      imageSource: require("../../assets/images/duplex.png"),
-    },
-    {
-      id: 4,
-      text: "Shared Apartment",
-      imageSource: require("../../assets/images/sharedapartment.png"),
-    },
-    {
-      id: 5,
-      text: "Self Contained",
-      imageSource: require("../../assets/images/travel.png"),
-    },
-    {
-      id: 6,
-      text: "Farm House",
-      imageSource: require("../../assets/images/farm.png"),
-    },
-    {
-      id: 7,
-      text: "Hostel",
-      imageSource: require("../../assets/images/hostel.png"),
-    },
-    {
-      id: 8,
-      text: "Commercial Space",
-      imageSource: require("../../assets/images/office.png"),
-    },
-    {
-      id: 9,
-      text: "Shop",
-      imageSource: require("../../assets/images/shops.png"),
-    },
-    {
-      id: 10,
-      text: "Short Let",
-      imageSource: require("../../assets/images/room.png"),
-    },
-  ];
 
-  const roomCountData = [
-    {
-      id: 0,
-      text: "None",
-    },
-    {
-      id: 1,
-      text: "1",
-    },
-    {
-      id: 2,
-      text: "2",
-    },
-    {
-      id: 3,
-      text: "3",
-    },
-    {
-      id: 4,
-      text: "4",
-    },
-    {
-      id: 5,
-      text: "5",
-    },
-    {
-      id: 6,
-      text: "6",
-    },
-    {
-      id: 7,
-      text: "7",
-    },
-    {
-      id: 8,
-      text: "8",
-    },
-    {
-      id: 9,
-      text: "9",
-    },
-    {
-      id: 10,
-      text: "10",
-    },
-  ];
+  useEffect(() => {
+    async function getState() {
+      try {
+        const states = await getNigerianStateData();
+        setChooseState(states);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getState();
+  }, []);
+
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss()}>
       <SafeAreaView style={styles.screen}>
         <ScrollView style={styles.container}>
           <View style={styles.chooseTradeCard}>
@@ -145,7 +69,7 @@ export default function AddTab() {
               horizontal
               contentContainerStyle={{ paddingVertical: 8 }}
             >
-              {houseTypeData.map((obj) => (
+              {houseData.map((obj) => (
                 <RectangularCard
                   key={obj.id}
                   hasIcon={true}
@@ -157,19 +81,19 @@ export default function AddTab() {
               ))}
             </ScrollView>
           </View>
-          <BottomDemacatingLine/>
+          <BottomDemacatingLine />
           <View style={styles.generalTabView}>
             <Text style={styles.text}>Price Range</Text>
             <Slider min={1000} max={1000000} step={1000} />
           </View>
-          <BottomDemacatingLine/>
+          <BottomDemacatingLine />
           <View style={styles.generalTabView}>
             <Text style={styles.text}>Bedrooms</Text>
             <ScrollView
               horizontal
               contentContainerStyle={{ paddingVertical: 8 }}
             >
-              {roomCountData.map((obj) => {
+              {roomData.map((obj) => {
                 return (
                   <RectangularCard
                     hasIcon={false}
@@ -182,14 +106,14 @@ export default function AddTab() {
               })}
             </ScrollView>
           </View>
-          <BottomDemacatingLine/>
+          <BottomDemacatingLine />
           <View style={styles.generalTabView}>
             <Text style={styles.text}>Bathrooms</Text>
             <ScrollView
               horizontal
               contentContainerStyle={{ paddingVertical: 8 }}
             >
-              {roomCountData.map((obj) => {
+              {roomData.map((obj) => {
                 return (
                   <RectangularCard
                     hasIcon={false}
@@ -202,8 +126,11 @@ export default function AddTab() {
               })}
             </ScrollView>
           </View>
-        <BottomDemacatingLine/>
-        
+          <BottomDemacatingLine />
+          <View style={[styles.generalTabView, { paddingRight: "3%" }]}>
+            <Text style={styles.text}>Location</Text>
+            <DropDownMenu myStates={chooseState} />
+          </View>
         </ScrollView>
       </SafeAreaView>
     </TouchableWithoutFeedback>
@@ -214,9 +141,12 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     backgroundColor: Color.white,
+    paddingTop: Platform.select({
+      android: StatusBar.currentHeight,
+      ios: 0,
+    }),
   },
   container: {
-    // padding: 10,
     flex: 1,
   },
   chooseTradeCard: {
@@ -229,7 +159,7 @@ const styles = StyleSheet.create({
   },
   generalTabView: {
     marginLeft: "5%",
-    marginTop: "5%",
+    // marginTop: "5%",
   },
   text: {
     fontWeight: "bold",

@@ -33,7 +33,7 @@ export default function FirstScreen({}) {
         <Text style={styles.otherText}>
           We'll start with these listings. You
         </Text>
-        <Text style={styles.otherText}>can change it later</Text>
+        <Text style={styles.otherText}>can change it </Text>
       </View>
       <View>
         <Button
@@ -131,6 +131,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 1, height: 1 },
     shadowOpacity: 0.3,
     shadowRadius: 3,
+    flexDirection: 'row',
   },
   buttonContainerWithoutIcons: {
     paddingVertical: deviceWidth < 321 ? 8 : 10,
@@ -140,11 +141,11 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 8,
     marginVertical: 6,
+    alignItems: "center",
     shadowColor: "black",
     shadowOffset: { width: 1, height: 1 },
     shadowOpacity: 0.3,
     shadowRadius: 3,
-    alignItems: "center",
   },
   buttonImage: {
     width: deviceWidth < 321 ? 18 : 25,
