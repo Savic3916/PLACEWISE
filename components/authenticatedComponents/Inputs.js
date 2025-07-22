@@ -58,6 +58,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: Color.lighterGrayOutline,
     backgroundColor: Color.lighterGrayOutline,
+    color: Color.black,
     ...shadows,
   },
   firstIconStyle: {

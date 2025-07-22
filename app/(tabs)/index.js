@@ -8,7 +8,9 @@ import {
   Platform,
   TouchableWithoutFeedback,
   Keyboard,
+  StatusBar,
 } from "react-native";
+import { useSelector, useDispatch } from "react-redux";
 import React from "react";
 import Color from "../../constants/Color";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
@@ -21,60 +23,11 @@ export default function Home() {
   const keyBoardDismissalMode =
     Platform.OS === "android" ? "on-drag" : "interactive";
 
-  const houseTypeData = [
-    {
-      id: 1,
-      text: "House",
-      imageSource: require("../../assets/images/house.png"),
-    },
-    {
-      id: 2,
-      text: "Apartment",
-      imageSource: require("../../assets/images/apartment.png"),
-    },
-    {
-      id: 3,
-      text: "Duplex",
-      imageSource: require("../../assets/images/duplex.png"),
-    },
-    {
-      id: 4,
-      text: "Shared Apartment",
-      imageSource: require("../../assets/images/sharedapartment.png"),
-    },
-    {
-      id: 5,
-      text: "Self Contained",
-      imageSource: require("../../assets/images/travel.png"),
-    },
-    {
-      id: 6,
-      text: "Farm House",
-      imageSource: require("../../assets/images/farm.png"),
-    },
-    {
-      id: 7,
-      text: "Hostel",
-      imageSource: require("../../assets/images/hostel.png"),
-    },
-    {
-      id: 8,
-      text: "Commercial Space",
-      imageSource: require("../../assets/images/office.png"),
-    },
-    {
-      id: 9,
-      text: "Shop",
-      imageSource: require("../../assets/images/shops.png"),
-    },
-    {
-      id: 10,
-      text: "Short Let",
-      imageSource: require("../../assets/images/room.png"),
-    },
-  ];
+  // REDUX: APP WIDE STATE
+  const houseData = useSelector((state) => state.houseTypeData.houseData);
+
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss()}>
       <SafeAreaView style={styles.screen}>
         <View style={styles.container}>
           <View style={styles.bellIconTopView}>
@@ -101,7 +54,7 @@ export default function Home() {
             keyboardDismissMode={keyBoardDismissalMode}
             // indicatorStyle="black"
           >
-            {houseTypeData.map((values) => {
+            {houseData.map((values) => {
               return (
                 <Card
                   key={values.id}
@@ -121,10 +74,15 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     backgroundColor: Color.white,
+    paddingTop: Platform.select({
+      android: StatusBar.currentHeight,
+      ios: 0,
+    }),
   },
   firstScreenText: {
     fontFamily: "SpaceMono-Regular",
     fontSize: 18,
+    color: Color.black,
   },
   container: {
     padding: 10,
