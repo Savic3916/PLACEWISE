@@ -23,22 +23,13 @@ export default function Button({
       <Pressable
         style={({ pressed }) =>
           pressed
-            ? [buttonContainerWithIcon, styles.hasIconPressed]
+            ? [buttonContainerWithIcon, styles.pressed]
             : buttonContainerWithIcon
         }
         onPress={onPress}
-        android_ripple={{
-          color: Color.supportingSecondaryButtonTeal,
-          borderless: true,
-        }}
       >
-        <View style={styles.buttonView}>
-          <Image
-            style={imageStyle}
-            source={imageSource}
-          />
-          <Text style={textStyle}>{text}</Text>
-        </View>
+        <Image style={imageStyle} source={imageSource} />
+        <Text style={textStyle}>{text}</Text>
       </Pressable>
     );
   } else {
@@ -46,11 +37,10 @@ export default function Button({
       <Pressable
         style={({ pressed }) =>
           pressed
-            ? [buttonContainerWithoutIcons, styles.hasNoIconPressed]
+            ? [buttonContainerWithoutIcons, styles.pressed]
             : buttonContainerWithoutIcons
         }
         onPress={onPress}
-        android_ripple={{ color: Color.supportingButtonRed, borderless: true }}
       >
         <Text style={textStyle}>{text}</Text>
       </Pressable>
@@ -61,18 +51,7 @@ export default function Button({
 const deviceWidth = Dimensions.get("screen").width;
 
 const styles = StyleSheet.create({
-  buttonView: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  hasIconPressed: {
+  pressed: {
     opacity: 0.5,
-    overflow: "hidden",
-    backgroundColor: Color.supportingSecondaryButtonTeal,
-  },
-  hasNoIconPressed: {
-    opacity: 0.5,
-    overflow: "hidden",
-    backgroundColor: Color.supportingButtonRed,
   },
 });
