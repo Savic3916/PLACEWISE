@@ -1,14 +1,7 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Dimensions,
-  SafeAreaView,
-  TouchableWithoutFeedback,
-  Keyboard,
-} from "react-native";
+import { StyleSheet, Text, View, Dimensions, SafeAreaView } from "react-native";
 import { useState } from "react";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
+import { signUp } from "../../util/auth/firebaseAPI";
 import Color from "../../constants/Color";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
@@ -106,144 +99,143 @@ export default function Register({}) {
       return;
     }
 
-    // if it is validated, work....
-    console.log("Everything is valid!");
+    // if it is validated, DO THIS....
+    const { email, password } = userInputs;
+
+    // send to the backend to store signUp user using FIREBASE
+    signUp(email.data, password.data);
   }
 
   return (
     // <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <SafeAreaView style={{ flex: 1, backgroundColor: Color.white }}>
-        <View style={styles.screen}>
-          <View style={styles.container}>
-            <Text style={styles.placeWiseText}>PLACEWISE</Text>
-            <Text
-              style={{
-                color: Color.textInputIconGrays,
-                fontWeight: "600",
-                letterSpacing: 1,
-                fontSize: deviceWidth < 321 ? 9 : 14,
-              }}
-            >
-              Hey there, Sign up to continue...
-            </Text>
-          </View>
-          <View style={{ marginTop: deviceWidth < 321 ? "0%" : "2%" }}>
-            <Input
-              text="Email Address"
-              inputStyle={styles.input}
-              inputTextStyle={styles.inputText}
-              iconName="envelope"
-              props={{
-                onChangeText: (enteredText) =>
-                  userInputsChangeHandler("email", enteredText),
-                value: userInputs.email.data,
-              }}
-            />
+    <SafeAreaView style={{ flex: 1, backgroundColor: Color.white }}>
+      <View style={styles.screen}>
+        <View style={styles.container}>
+          <Text style={styles.placeWiseText}>PLACEWISE</Text>
+          <Text
+            style={{
+              color: Color.textInputIconGrays,
+              fontWeight: "600",
+              letterSpacing: 1,
+              fontSize: deviceWidth < 321 ? 9 : 14,
+            }}
+          >
+            Hey there, Sign up to continue...
+          </Text>
+        </View>
+        <View style={{ marginTop: deviceWidth < 321 ? "0%" : "2%" }}>
+          <Input
+            text="Email Address"
+            inputStyle={styles.input}
+            inputTextStyle={styles.inputText}
+            iconName="envelope"
+            props={{
+              onChangeText: (enteredText) =>
+                userInputsChangeHandler("email", enteredText),
+              value: userInputs.email.data,
+            }}
+          />
 
-            {/* email error message */}
-            {!userInputs.email.isValid && (
-              <Text style={styles.errorText}>
-                email must contain at least one letter before the '@' symbol
-              </Text>
-            )}
-            <Input
-              hasPassword={true}
-              text="Password"
-              inputStyle={styles.input}
-              inputTextStyle={styles.inputText}
-              iconName="lock"
-              onPress={showHidePasswordHandler}
-              props={{
-                secureTextEntry: secure,
-                onChangeText: (enteredText) =>
-                  userInputsChangeHandler("password", enteredText),
-                value: userInputs.password.data,
-              }}
-              secure={secure}
-            />
-
-            {/* password error message */}
-            {!userInputs.password.isValid &&
-            userInputs.password.data.length < 8 ? (
-              <Text style={styles.errorText}>
-                password must be more than 8 characters
-              </Text>
-            ) : (
-              !userInputs.password.isValid && (
-                <Text style={styles.errorText}>
-                  password must contain letters, special character and number
-                </Text>
-              )
-            )}
-            <Input
-              hasPassword={true}
-              text="Cofirm Password"
-              inputStyle={styles.input}
-              inputTextStyle={styles.inputText}
-              iconName="lock"
-              onPress={showHidePasswordHandlerTwo}
-              props={{
-                secureTextEntry: secureTwo,
-                onChangeText: (enteredText) =>
-                  userInputsChangeHandler("confirmPassword", enteredText),
-                value: userInputs.confirmPassword.data,
-              }}
-              secure={secureTwo}
-            />
-
-            {/* confirmpassword error message */}
-            {!userInputs.confirmPassword.isValid &&
-            userInputs.confirmPassword.data.length < 8 ? (
-              <Text style={styles.errorText}>
-                password must be more than 8 characters
-              </Text>
-            ) : !userInputs.confirmPassword.isValid &&
-              userInputs.confirmPassword.data !== userInputs.password.data ? (
-              <Text style={styles.errorText}>Password mismatch</Text>
-            ) : (
-              !userInputs.password.isValid && (
-                <Text style={styles.errorText}>
-                  password must contain letters, special character and number
-                </Text>
-              )
-            )}
-          </View>
-          <View style={{ flexDirection: "row", marginVertical: 10 }}>
-            <Checkboxx
-              checkboxStyle={styles.checkbox}
-              isChecked={isChecked}
-              setChecked={setChecked}
-            />
-            <Text style={styles.agreementText}>
-              I have read and I agree to{" "}
-            </Text>
-            <Link
-              href="/auth/useragreement"
-              style={[
-                styles.agreementText,
-                { color: Color.buttonRed, fontWeight: "bold" },
-              ]}
-            >
-              User Agreement Privacy Policy
-            </Link>
-          </View>
-
-          {/* user agreement error message */}
-          {!isChecked && (
+          {/* email error message */}
+          {!userInputs.email.isValid && (
             <Text style={styles.errorText}>
-              Please tick the box to continue
+              email must contain at least one letter before the '@' symbol
             </Text>
           )}
-          <Button
-            hasIcon={false}
-            text="REGISTER"
-            onPress={signupButtonHandler}
-            buttonContainerWithoutIcons={styles.buttonContainerWithoutIcons}
-            textStyle={styles.buttonText}
+          <Input
+            hasPassword={true}
+            text="Password"
+            inputStyle={styles.input}
+            inputTextStyle={styles.inputText}
+            iconName="lock"
+            onPress={showHidePasswordHandler}
+            props={{
+              secureTextEntry: secure,
+              onChangeText: (enteredText) =>
+                userInputsChangeHandler("password", enteredText),
+              value: userInputs.password.data,
+            }}
+            secure={secure}
           />
-          <LoginSignupBottomContainer isLogin={false} />
+
+          {/* password error message */}
+          {!userInputs.password.isValid &&
+          userInputs.password.data.length < 8 ? (
+            <Text style={styles.errorText}>
+              password must be more than 8 characters
+            </Text>
+          ) : (
+            !userInputs.password.isValid && (
+              <Text style={styles.errorText}>
+                password must contain letters, special character and number
+              </Text>
+            )
+          )}
+          <Input
+            hasPassword={true}
+            text="Cofirm Password"
+            inputStyle={styles.input}
+            inputTextStyle={styles.inputText}
+            iconName="lock"
+            onPress={showHidePasswordHandlerTwo}
+            props={{
+              secureTextEntry: secureTwo,
+              onChangeText: (enteredText) =>
+                userInputsChangeHandler("confirmPassword", enteredText),
+              value: userInputs.confirmPassword.data,
+            }}
+            secure={secureTwo}
+          />
+
+          {/* confirmpassword error message */}
+          {!userInputs.confirmPassword.isValid &&
+          userInputs.confirmPassword.data.length < 8 ? (
+            <Text style={styles.errorText}>
+              password must be more than 8 characters
+            </Text>
+          ) : !userInputs.confirmPassword.isValid &&
+            userInputs.confirmPassword.data !== userInputs.password.data ? (
+            <Text style={styles.errorText}>Password mismatch</Text>
+          ) : (
+            !userInputs.password.isValid && (
+              <Text style={styles.errorText}>
+                password must contain letters, special character and number
+              </Text>
+            )
+          )}
         </View>
-      </SafeAreaView>
+        <View style={{ flexDirection: "row", marginVertical: 10 }}>
+          <Checkboxx
+            checkboxStyle={styles.checkbox}
+            isChecked={isChecked}
+            setChecked={setChecked}
+          />
+          <Text style={styles.agreementText}>I have read and I agree to </Text>
+          <Link
+            href="/auth/useragreement"
+            style={[
+              styles.agreementText,
+              { color: Color.buttonRed, fontWeight: "bold" },
+            ]}
+          >
+            User Agreement Privacy Policy
+          </Link>
+        </View>
+
+        {/* user agreement error message */}
+        {!isChecked && (
+          <Text style={styles.errorText}>Please tick the box to continue</Text>
+        )}
+        <Button
+          hasIcon={false}
+          text="REGISTER"
+          onPress={signupButtonHandler}
+          buttonContainerWithoutIcons={styles.buttonContainerWithoutIcons}
+          textStyle={styles.buttonText}
+        />
+        <LoginSignupBottomContainer isLogin={false} />
+      </View>
+    </SafeAreaView>
     // </TouchableWithoutFeedback>
   );
 }

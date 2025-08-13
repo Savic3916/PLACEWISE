@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_KEY = process.env.EXPO_PUBLIC_API_KEY;
+const API_KEY = process.env.EXPO_PUBLIC_COUNTRY_STATE_API_KEY;
 
 export async function getNigerianStateData() {
   const response = await axios.get(

@@ -8,11 +8,12 @@ import {
   Keyboard,
 } from "react-native";
 import { useState } from "react";
-import { Link, router } from "expo-router";
+import { router } from "expo-router";
 import Color from "../../constants/Color";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import LoginSignupBottomContainer from "../../components/LoginSignupBottomContainer";
+import { login } from "../../util/auth/firebaseAPI";
 
 const deviceWidth = Dimensions.get("window").width;
 
@@ -72,86 +73,85 @@ export default function Login({}) {
     }
 
     // what to do if they are both correct: which is send to the backend to authenticate
-    // console.log(userDetails);
+    const { email, password } = userInputs;
 
     // for now, i'll do
     if (emailIsValid && passwordIsValid) {
-      router.navigate("/(tabs)");
+      login(email.data, password.data);
+      // router.navigate("/(tabs)");
     }
   }
 
   return (
     // <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <SafeAreaView style={{ flex: 1, backgroundColor: Color.white }}>
-        <View style={styles.screen}>
-          <View style={styles.container}>
-            <Text style={styles.firstScreenText}>Welcome Back to</Text>
-            <Text style={styles.placeWiseText}>PLACEWISE</Text>
-            <Text
-              style={{
-                color: Color.textInputIconGrays,
-                fontWeight: "600",
-                fontSize: deviceWidth < 321 ? 9 : 14,
-              }}
-            >
-              Hey there, Sign in to continue
-            </Text>
-          </View>
-          <View>
-            <Input
-              text="Email Address"
-              inputStyle={styles.input}
-              inputTextStyle={styles.inputText}
-              iconName="envelope"
-              props={{
-                onChangeText: (enteredText) =>
-                  userInputsChangeHandler("email", enteredText),
-                value: userInputs.email.data,
-              }}
-            />
-            {!userInputs.email.isValid && (
-              <Text style={styles.errorText}>
-                email must contain at least one letter before the '@' symbol
-              </Text>
-            )}
-            <Input
-              hasPassword={true}
-              text="Password"
-              inputStyle={styles.input}
-              inputTextStyle={styles.inputText}
-              iconName="lock"
-              onPress={showHidePasswordHandler}
-              props={{
-                secureTextEntry: secure,
-                onChangeText: (enteredText) =>
-                  userInputsChangeHandler("password", enteredText),
-                value: userInputs.password.data,
-              }}
-              secure={secure}
-            />
-            {!userInputs.password.isValid &&
-            userInputs.password.data.length < 8 ? (
-              <Text style={styles.errorText}>
-                password must be more than 8{" "}
-              </Text>
-            ) : (
-              !userInputs.password.isValid && (
-                <Text style={styles.errorText}>
-                  password must contain letters, special character and number{" "}
-                </Text>
-              )
-            )}
-          </View>
-          <Button
-            hasIcon={false}
-            text="LOGIN"
-            onPress={loginButtonHandler}
-            buttonContainerWithoutIcons={styles.buttonContainerWithoutIcons}
-            textStyle={styles.buttonText}
-          />
-          <LoginSignupBottomContainer isLogin={true} />
+    <SafeAreaView style={{ flex: 1, backgroundColor: Color.white }}>
+      <View style={styles.screen}>
+        <View style={styles.container}>
+          <Text style={styles.firstScreenText}>Welcome Back to</Text>
+          <Text style={styles.placeWiseText}>PLACEWISE</Text>
+          <Text
+            style={{
+              color: Color.textInputIconGrays,
+              fontWeight: "600",
+              fontSize: deviceWidth < 321 ? 9 : 14,
+            }}
+          >
+            Hey there, Sign in to continue
+          </Text>
         </View>
-      </SafeAreaView>
+        <View>
+          <Input
+            text="Email Address"
+            inputStyle={styles.input}
+            inputTextStyle={styles.inputText}
+            iconName="envelope"
+            props={{
+              onChangeText: (enteredText) =>
+                userInputsChangeHandler("email", enteredText),
+              value: userInputs.email.data,
+            }}
+          />
+          {!userInputs.email.isValid && (
+            <Text style={styles.errorText}>
+              email must contain at least one letter before the '@' symbol
+            </Text>
+          )}
+          <Input
+            hasPassword={true}
+            text="Password"
+            inputStyle={styles.input}
+            inputTextStyle={styles.inputText}
+            iconName="lock"
+            onPress={showHidePasswordHandler}
+            props={{
+              secureTextEntry: secure,
+              onChangeText: (enteredText) =>
+                userInputsChangeHandler("password", enteredText),
+              value: userInputs.password.data,
+            }}
+            secure={secure}
+          />
+          {!userInputs.password.isValid &&
+          userInputs.password.data.length < 8 ? (
+            <Text style={styles.errorText}>password must be more than 8 </Text>
+          ) : (
+            !userInputs.password.isValid && (
+              <Text style={styles.errorText}>
+                password must contain letters, special character and number{" "}
+              </Text>
+            )
+          )}
+        </View>
+        <Button
+          hasIcon={false}
+          text="LOGIN"
+          onPress={loginButtonHandler}
+          buttonContainerWithoutIcons={styles.buttonContainerWithoutIcons}
+          textStyle={styles.buttonText}
+        />
+        <LoginSignupBottomContainer isLogin={true} />
+      </View>
+    </SafeAreaView>
     // </TouchableWithoutFeedback>
   );
 }
